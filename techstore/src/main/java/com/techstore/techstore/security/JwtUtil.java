@@ -2,11 +2,15 @@ package com.techstore.techstore.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+import java.security.Key;
 import java.util.Date;
 
 public class JwtUtil {
 
-    private static final String SECRET = "mi_clave_secreta";
+    private static final Key SECRET =
+            Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public static String generarToken(String username) {
 
@@ -14,7 +18,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .signWith(SECRET)
                 .compact();
     }
 }
