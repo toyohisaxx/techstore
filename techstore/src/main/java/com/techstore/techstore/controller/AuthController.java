@@ -1,32 +1,30 @@
 package com.techstore.techstore.controller;
 
+import com.techstore.techstore.dto.LoginRequest;
+import com.techstore.techstore.dto.LoginResponse;
 import com.techstore.techstore.security.JwtUtil;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final String USERNAME = "admin";
-    private final String PASSWORD = "1234";
+    private final String USERNAME = "admin@techstore.cl";
+    private final String PASSWORD = "Admin1234";
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> datos) {
+    public LoginResponse login(@RequestBody LoginRequest request) {
 
-        String username = datos.get("username");
-        String password = datos.get("password");
+        if (USERNAME.equals(request.getUsername())
+                && PASSWORD.equals(request.getPassword())) {
 
-        if (USERNAME.equals(username) && PASSWORD.equals(password)) {
+            String token = JwtUtil.generarToken(request.getUsername());
 
-            String token = JwtUtil.generarToken(username);
-
-            Map<String, String> respuesta = new HashMap<>();
-            respuesta.put("token", token);
-
-            return respuesta;
+            return new LoginResponse(
+                    token,
+                    "Bearer",
+                    "3600"
+            );
         }
 
         throw new RuntimeException("Credenciales incorrectas");

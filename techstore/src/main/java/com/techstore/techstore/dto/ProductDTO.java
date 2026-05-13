@@ -1,37 +1,13 @@
-package com.techstore.techstore.model;
+package com.techstore.techstore.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "products")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ProductDTO {
 
     private String nombre;
-
-    private Double precio;
-
-    private Integer stock;
-
     private String descripcion;
-
+    private Double precio;
+    private Integer stock;
     private String categoria;
-
-    private Boolean activo = true;
-
-    public Product() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Boolean activo;
 
     public String getNombre() {
         return nombre;
@@ -39,6 +15,14 @@ public class Product {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Double getPrecio() {
@@ -55,14 +39,6 @@ public class Product {
 
     public void setStock(Integer stock) {
         this.stock = stock;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getCategoria() {

@@ -16,24 +16,26 @@ public class ProductController {
         this.service = service;
     }
 
+    // LISTAR
     @GetMapping
     public List<Product> listar() {
         return service.listar();
     }
 
+    // CREAR
     @PostMapping
-    public Product crear(@RequestBody Product p) {
+    public Product guardar(@RequestBody Product p) {
         return service.guardar(p);
     }
 
+    // ACTUALIZAR
     @PutMapping("/{id}")
-    public Product actualizar(
-            @PathVariable Long id,
-            @RequestBody Product p) {
-
+    public Product actualizar(@PathVariable Long id,
+                              @RequestBody Product p) {
         return service.actualizar(id, p);
     }
 
+    // ELIMINADO LOGICO
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         service.eliminar(id);
