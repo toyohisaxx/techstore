@@ -1,4 +1,4 @@
-package com.techstore.techstore.dto;
+package cl.techstore.api.dto;
 
 public class LoginRequest {
 

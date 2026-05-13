@@ -1,35 +1,35 @@
-package com.techstore.techstore.service;
+package cl.techstore.api.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.techstore.techstore.model.Product;
-import com.techstore.techstore.repository.ProductRepository;
+import cl.techstore.api.model.Producto;
+import cl.techstore.api.repository.ProductoRepository;
 
 @Service
-public class ProductService {
+public class ProductoService {
 
-    private final ProductRepository repository;
+    private final ProductoRepository repository;
 
-    public ProductService(ProductRepository repository) {
+    public ProductoService(ProductoRepository repository) {
         this.repository = repository;
     }
 
     // LISTAR PRODUCTOS ACTIVOS
-    public List<Product> listar() {
+    public List<Producto> listar() {
         return repository.findByActivoTrue();
     }
 
     // GUARDAR PRODUCTO
-    public Product guardar(Product p) {
+    public Producto guardar(Producto p) {
         return repository.save(p);
     }
 
     // ACTUALIZAR PRODUCTO
-    public Product actualizar(Long id, Product p) {
+    public Producto actualizar(Long id, Producto p) {
 
-        Product producto = repository.findById(id)
+        Producto producto = repository.findById(id)
                 .orElseThrow();
 
         producto.setNombre(p.getNombre());
@@ -44,7 +44,7 @@ public class ProductService {
     // ELIMINADO LOGICO
     public void eliminar(Long id) {
 
-        Product producto = repository.findById(id)
+        Producto producto = repository.findById(id)
                 .orElseThrow();
 
         producto.setActivo(false);

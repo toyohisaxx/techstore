@@ -1,4 +1,4 @@
-package com.techstore.techstore.security;
+package cl.techstore.api.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

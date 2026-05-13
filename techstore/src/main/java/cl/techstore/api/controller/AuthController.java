@@ -1,8 +1,9 @@
-package com.techstore.techstore.controller;
+package cl.techstore.api.controller;
 
-import com.techstore.techstore.dto.LoginRequest;
-import com.techstore.techstore.dto.LoginResponse;
-import com.techstore.techstore.security.JwtUtil;
+import cl.techstore.api.dto.LoginRequest;
+import cl.techstore.api.dto.LoginResponse;
+import cl.techstore.api.security.JwtUtil;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController

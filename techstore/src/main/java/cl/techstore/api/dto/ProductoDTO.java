@@ -1,6 +1,6 @@
-package com.techstore.techstore.dto;
+package cl.techstore.api.dto;
 
-public class ProductDTO {
+public class ProductoDTO {
 
     private String nombre;
     private String descripcion;

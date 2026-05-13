@@ -1,10 +1,10 @@
-package com.techstore.techstore.model;
+package cl.techstore.api.model;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Product {
 
     private Boolean activo = true;
 
-    public Product() {
+    public Producto() {
     }
 
     public Long getId() {
