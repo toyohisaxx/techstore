@@ -4,31 +4,60 @@ services:
 
   db:
     image: postgres:15
-    container_name: techstore-db
-
     environment:
       POSTGRES_DB: techstore
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
-
     ports:
       - "5432:5432"
-
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d techstore"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - techstore-net
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
 
   api:
-    build: .
-    container_name: techstore-api
-
+    image: techstore-api:latest
     ports:
       - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/techstore
+      DB_USERNAME: admin
+      DB_PASSWORD: admin123
+      SQS_QUEUE_URL: ${SQS_QUEUE_URL:-https://sqs.us-east-1.amazonaws.com/ACCOUNT_ID/techstore-audit-queue}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+    networks:
+      - techstore-net
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 256M
 
-    depends_on:
-      db:
-        condition: service_healthy
-
-    restart: always
+networks:
+  techstore-net:
+    driver: overlay
