@@ -88,4 +88,4 @@ La aplicación Spring Boot lee su configuración desde variables de entorno inye
 - Los endpoints del catálogo están protegidos con autenticación JWT (`JwtFilter`, `SecurityConfig`).
 - El endpoint `/health` está expuesto sin autenticación exclusivamente para el *health check* del Application Load Balancer.
 - Las tareas ECS solo son accesibles a través del ALB; no exponen IP pública directa para tráfico de aplicación..
-- final 
+- final video 
