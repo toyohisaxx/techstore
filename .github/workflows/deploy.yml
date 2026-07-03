@@ -19,8 +19,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Ejecutar tests con Maven
+        run: mvn clean test -f techstore/pom.xml
+
       - name: Compilar con Maven
-        run: mvn clean package -DskipTests -f techstore/pom.xml
+        run: mvn package -DskipTests -f techstore/pom.xml
 
       - name: Configurar credenciales AWS
         uses: aws-actions/configure-aws-credentials@v2

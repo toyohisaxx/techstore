@@ -81,10 +81,10 @@ El archivo `.github/workflows/deploy.yml` se activa en cada `push` a la rama `ma
 La aplicación Spring Boot lee su configuración desde variables de entorno inyectadas por la Task Definition (no hardcodeadas en el código), lo que permite usar la misma imagen Docker en distintos entornos (local, staging, producción):
 
 - `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` — conexión a RDS PostgreSQL
-- `SQS_QUEUE_URL` — URL de la cola de auditoría
+- `SQS_QUEUE_URL` — URL de la cola de auditoría: `https://sqs.us-east-1.amazonaws.com/652155226718/techstore-audit-queue`
 
 ## Seguridad
 
 - Los endpoints del catálogo están protegidos con autenticación JWT (`JwtFilter`, `SecurityConfig`).
 - El endpoint `/health` está expuesto sin autenticación exclusivamente para el *health check* del Application Load Balancer.
-- Las tareas ECS solo son accesibles a través del ALB; no exponen IP pública directa para tráfico de aplicación.
+- Las tareas ECS solo son accesibles a través del ALB; no exponen IP pública directa para tráfico de aplicación..
