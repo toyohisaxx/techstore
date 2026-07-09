@@ -1,11 +1,24 @@
 package cl.techstore.api.model;
 
+
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Producto {
+    
 
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<ImagenProducto> imagenes;
+    public List<ImagenProducto> getImagenes() {
+       return imagenes;
+    }
+
+    public void setImagenes(List<ImagenProducto> imagenes) {
+       this.imagenes = imagenes;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
